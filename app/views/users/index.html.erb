@@ -1,15 +1,24 @@
 <div class="jumbotron text-center">
 <h2>People</h2>
-<div class="btn-group" role="group" aria-label="Default Button Groups">
-<button type="button" class="btn btn-default">Everyone</button>
-<button type="button" class="btn btn-default">Friends</button>
-<button type="button" class="btn btn-default">Requests</button>
-<button type="button" class="btn btn-default">Pending</button>
-</div>
+    <div class="btn-group" role="group" aria-label="Default Button Groups">
+        
+        <!-- see UsersController index. define :people to filter friend status --> 
+        <%= link_to "Everyone", users_path, class: "btn btn-default #{'active' unless params[:people]}" %>
+            <!-- #all users except for the current user -->
+        
+        <%= link_to "Friends", users_path(people: "friends"), class: "btn btn-default #{'active' if params[:people] == 'friends'}" %>
+            <!-- If the url is ->  localhost:3000/users?friends  it will display your friends. -->
+        
+        <%= link_to "Requests", users_path(people: "requests"), class: "btn btn-default #{'active' if params[:people] == 'requests'}" %>
+            <!-- If the url is ->  localhost:3000/users?requests  it will display your requests. -->
+        
+        <%= link_to "Pending", users_path(people: "pending"), class: "btn btn-default #{'active' if params[:people] == 'pending'}" %>
+            <!-- If the url is ->  localhost:3000/users?pending  it will display the request that are pending for your approval. -->
+    </div>
 </div>
 
 <div class="container">
-<div class="row">
-<%= render @users %>
-</div>
+    <div class="row">
+        <%= render @users %>
+    </div>
 </div>
