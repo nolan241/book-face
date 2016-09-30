@@ -16,6 +16,10 @@ gem 'devise', '~> 4.2'
 #https://github.com/lwe/gravatarify
 gem 'gravatarify', '~> 3.0.0'
 
+#https://github.com/chaps-io/public_activity
+# use this gem to display user activity when accepting friend
+gem 'public_activity'
+
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do

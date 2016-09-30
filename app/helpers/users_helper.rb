@@ -6,13 +6,17 @@ module UsersHelper
     def action_buttons(user)
         #defines actions for buttons in ./app/views/users/_user.html.erb from methods in ./app/models/user.rb
 		case current_user.friendship_status(user) when "friends"
-			"Remove Friendship"
+			#Cancel friendship link
+			link_to "Cancel Friendship", friendship_path(current_user.friendship_relation(user)), method: :delete
 		when "pending"
-			"Cancel Request"
+			#Cancel Request link
+			link_to "Cancel Request", friendship_path(current_user.friendship_relation(user)), method: :delete
 		when "requested"
-			"Accept or Deny"
+			#Accept or Deny looks at friendships_controller
+			link_to "Accept", accept_friendship_path(current_user.friendship_relation(user)), method: :put
 		when "not_friends"
-			"Add as a Friend"
+			#looks at friendships resource in routes
+			link_to "Add as Friend", friendships_path(user_id: user.id), method: :post
 		end
 	end
 end

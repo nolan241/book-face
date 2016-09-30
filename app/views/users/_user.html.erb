@@ -5,7 +5,11 @@
         <% end %>
         <div class="caption">
             <h3><%= user.username %></h3>
+            
+            <% if current_user %><!-- display buttons if logged in -->
             <p><%= action_buttons(user)%></p> <!-- buttons from /app/helpers/users_helper.rb -->
+            <% end %>
+            
         </div>
     </div>
 </div>

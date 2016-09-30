@@ -38,12 +38,17 @@ class User < ActiveRecord::Base
 
           else #friendship not active but is pending or requested
             if friendship.first.user == self #You're waiting approval from a friendship request you've made.
-              return "pending".
+              return "pending"
             else #You a have pending friendship request from another user.
               return "requested"
             end
           end
         end
+    end
+
+    def friendship_relation(user_2)
+      #finds the friendship relatinship for the destroy method for the friendship_controller
+      Friendship.where(user_id: [self.id,user_2.id], friend_id: [self.id,user_2.id]).first
     end
     
 end
