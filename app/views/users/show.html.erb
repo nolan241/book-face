@@ -1,3 +1,4 @@
+<!-- top bio section --> 
 <div class="jumbotron">
     <div class="container">
     
@@ -21,4 +22,52 @@
         </div>
     
     </div>
+</div>
+
+<!-- mid friend satus columns --> 
+<div class="container">
+	<div class="row">
+    	
+    	<!-- Friend Zone -->
+    	<div class="col-md-3">
+        	<div class="panel panel-default">
+            	<div class="panel-heading">
+            	   <!-- Friend Count -->
+            	    Friends (<%= @user.active_friends.size %>)
+            	</div>
+        
+            	<div class="panel-body">
+            	    <!-- List last 16 friends added and display avatar image with link to friend -->
+                	<% @user.active_friends.last(16).each do |user| %>
+                    	<%= link_to user_path(user.username) do %>
+                    		<%= gravatar_tag user.email, size: 40 %>
+                    	<% end %>
+                	<% end %>
+            	</div>
+            
+        	</div>
+    	</div>
+    	
+    	<!-- Post Zone -->
+    	<div class="col-md-6">
+    	    
+    	</div>
+    	<!-- Profile Activity -->
+    	<div class="col-md-3">
+    		<div class="panel panel-default">
+        		<div class="panel-heading">
+        		    Recent Activity
+        		</div>
+        		
+        		<div class="panel-body">
+        		    <!-- 
+        		        show recent activities accepted friendships from ./app/controllers/users_controller.rb and 
+        		        params for friends added ./app/controllers/friendships_controller.rb 
+        		    -->
+        			<%= render_activities(@activities) %>
+        		</div>
+    		</div>
+    	</div>
+
+	</div>
 </div>

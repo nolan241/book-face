@@ -1,0 +1,8 @@
+issues
+- logged in https://bookface-nolan241.c9users.io/users should be able to destroy accepted friends. link does not display, Cancel Friendship 
+
+
+- Cancel friend errors out
+
+
+- Activity Feed does not work
