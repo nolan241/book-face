@@ -20,6 +20,10 @@ gem 'gravatarify', '~> 3.0.0'
 # use this gem to display user activity when accepting friend
 gem 'public_activity'
 
+# https://github.com/dejan/auto_html
+# use this gem to allow users to add links that are converted to viewable resources
+gem 'auto_html'
+
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
