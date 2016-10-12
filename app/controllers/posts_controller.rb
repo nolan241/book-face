@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
     #find previously created post id on edit update and destroy
 	before_action :set_post, only: [:edit, :update, :destroy]
-
     
 	def create
 		@post = current_user.posts.new(post_params)
