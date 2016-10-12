@@ -22,7 +22,7 @@ gem 'public_activity'
 
 # https://github.com/dejan/auto_html
 # use this gem to allow users to add links that are converted to viewable resources
-gem 'auto_html'
+gem 'auto_html', '~> 1.6', '>= 1.6.4'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 

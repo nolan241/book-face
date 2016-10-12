@@ -26,11 +26,17 @@ class UsersController < ApplicationController
   end
   
   def show
-    #shows the activities from 
-    @activities = PublicActivity::Activity.where(owner_id: @user.id)
+    #create new post on users/show.html.erb
+    @post = Post.new
+    #display previously created posts on the users/show.html.erb page
+    @posts = @user.posts.order('created_at DESC')
+    
+    #shows activities 
+     @activities = PublicActivity::Activity.where(owner_id: @user.id).order('created_at DESC')
+
   end
   
-  private 
+  private
   
   def set_user
     @user = User.find_by(username: params[:id])
