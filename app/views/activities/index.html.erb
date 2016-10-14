@@ -14,45 +14,47 @@
 <div class="container">
 	<ul class="timeline">
         
-        <!-- for each activity --> 
+        <!-- for each activity basically does the same as the each block but with an index so it tracks the number/index of each iteration--> 
 	    <% @activities.each_with_index do |activity| %>
-
-        	<% if activity.trackable %>
-            
-                <!-- Toggle left and right li from even odd on loop --> 
-            	<% if cycle('odd','even') == 'odd' %>
-                	<li class="timeline-inverted">
-                	<% else %>
-                	<li>
-            	<% end %>
-            	
-            	<!-- gravatar image --> 
-        	    <div class="timeline-badge"><%= gravatar_tag activity.owner.email, size: 55 %></div>
+	        
+	        <!-- only disply the activities for friendships and the activities for the user thats logged in --> 
+            <% unless activity.trackable_type == "Friendship" && activity.owner == current_user %>
+            	<% if activity.trackable %>
                 
-                <!-- user activity -->
-                <div class="timeline-panel">
-                	<div class="timeline-heading">
-                	    <!-- username --> 
-                    	<h4 class="timeline-title"><%= link_to activity.owner.username, user_path(activity.owner.username) %></h4>
-                    	<!-- activity time ago --> 
-                    	<p><small><%=  time_ago_in_words(activity.created_at)%> ago</small></p>
+                    <!-- Toggle left and right li from even odd on loop --> 
+                	<% if cycle('odd','even') == 'odd' %>
+                    	<li class="timeline-inverted">
+                    	<% else %>
+                    	<li>
+                	<% end %>
+                	
+                	<!-- gravatar image --> 
+            	    <div class="timeline-badge"><%= gravatar_tag activity.owner.email, size: 55 %></div>
+                    
+                    <!-- user activity -->
+                    <div class="timeline-panel">
+                    	<div class="timeline-heading">
+                    	    <!-- username --> 
+                        	<h4 class="timeline-title"><%= link_to activity.owner.username, user_path(activity.owner.username) %></h4>
+                        	<!-- activity time ago --> 
+                        	<p><small><%=  time_ago_in_words(activity.created_at)%> ago</small></p>
+                    	</div>
+    
+                        <!-- activity details -->
+                    	<div class="timeline-body">
+                    	    <!-- display post activities --> 
+                        	<% case activity.trackable_type when "Post" %>
+                        	<p><%= raw(activity.trackable.content_html) %>
+    
+                    	    <!-- display friendship activities --> 
+                        	<% when "Friendship" %>
+                        	<%= link_to activity.owner.username, user_path(activity.owner.username) %> is now friends with <%= link_to activity.recipient.username, user_path(activity.recipient.username) %>
+                        	<% end %>
+                    	</div>
                 	</div>
-
-                    <!-- activity details -->
-                	<div class="timeline-body">
-                	    <!-- display post activities --> 
-                    	<% case activity.trackable_type when "Post" %>
-                    	<p><%= raw(activity.trackable.content_html) %>
-
-                	    <!-- display friendship activities --> 
-                    	<% when "Friendship" %>
-                    	<%= link_to activity.owner.username, user_path(activity.owner.username) %> is now friends with <%= link_to activity.recipient.username, user_path(activity.recipient.username) %>
-                    	<% end %>
-                	</div>
-            	</div>
-        
-        	<% end %>
-
+            
+            	<% end %>
+    	    <% end %>
 	    <% end %>
 
 	</ul>

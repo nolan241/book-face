@@ -2,18 +2,19 @@
 <h2>People</h2>
     <div class="btn-group" role="group" aria-label="Default Button Groups">
         
-        <!-- see UsersController index. define :people to filter friend status --> 
+        <!-- see UsersController index. define people:? to filter friend status --> 
         <%= link_to "Everyone", users_path, class: "btn btn-default #{'active' unless params[:people]}" %>
             <!-- #all users except for the current user -->
         
-        <%= link_to "Friends", users_path(people: "friends"), class: "btn btn-default #{'active' if params[:people] == 'friends'}" %>
+        <%= link_to "Friends (#{@friend_count})", users_path(people: "friends"), class: "btn btn-default #{'active' if params[:people] == 'friends'}" %>
             <!-- If the url is ->  localhost:3000/users?friends  it will display your friends. -->
         
-        <%= link_to "Requests", users_path(people: "requests"), class: "btn btn-default #{'active' if params[:people] == 'requests'}" %>
+        <%= link_to "Requests (#{request_count})", users_path(people: "requests"), class: "btn btn-default #{'active' if params[:people] == 'requests'}" %>
             <!-- If the url is ->  localhost:3000/users?requests  it will display your requests. -->
         
-        <%= link_to "Pending", users_path(people: "pending"), class: "btn btn-default #{'active' if params[:people] == 'pending'}" %>
+        <%= link_to "Pending (#{@pending_count})", users_path(people: "pending"), class: "btn btn-default #{'active' if params[:people] == 'pending'}" %>
             <!-- If the url is ->  localhost:3000/users?pending  it will display the request that are pending for your approval. -->
+
     </div>
 </div>
 
